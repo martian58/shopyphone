@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -20,6 +19,11 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html', {})
+
+
+def product(request,pk):
+        product = Product.objects.get(id=pk)
+        return render(request, 'product.html', {'product':product})
 
 
 def login_user(request):

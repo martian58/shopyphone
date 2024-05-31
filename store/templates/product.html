@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Product Details</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Discover our amazing products</p>
+        </div>
+    </div>
+</header>
+
+<!-- Product Details Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card mb-3 shadow-lg border-0 rounded-lg">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="{{ product.name }}">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text">{{ product.description }}</p>
+                                <p class="card-text"><strong>Price: </strong>${{ product.price }}</p>
+                                <p class="card-text"><small class="text-muted">Last updated 1 min ago</small></p>
+                                <a href="3" class="btn btn-primary mt-3">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h4>Related Products</h4>
+                    Fuck shit
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        {% comment %} {% for related_product in related_products %} {% endcomment %}
+                        <div class="col">
+                            <div class="card h-100">
+                                {% comment %} <img src="{{ related_product.image.url }}" class="card-img-top" alt="{{ related_product.name }}"> {% endcomment %}
+                                <div class="card-body">
+                                    {% comment %} <h5 class="card-title">{{ related_product.name }}</h5> {% endcomment %}
+                                    {% comment %} <p class="card-text">${{ related_product.price }}</p> {% endcomment %}
+                                    {% comment %} <a href="{% url 'product_detail' related_product.id %}" class="btn btn-outline-primary">View Details</a> {% endcomment %}
+                                </div>
+                            </div>
+                        </div>
+                        {% comment %} {% endfor %} {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
