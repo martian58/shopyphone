@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Register</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Register your account here</p>
+        </div>
+    </div>
+</header>
+
+<!-- Registration Form Section -->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-6">
+                <div class="card shadow-lg border-0 rounded-lg">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                    <div class="card-body">
+                        <form method="post" action="{% url "register" %}">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                <button class="btn btn-primary" type="submit">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center py-3">
+                        <div class="small"><a href="{% url 'login' %}">Already have an account? Login!</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
