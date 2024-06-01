@@ -72,8 +72,8 @@
             success: function(json) {
                 // console.log(json);
 
-                document.getElementById("cart_quantity").textContent = json.quantity
-                location.reload
+                document.getElementById('cart_quantity').textContent = json.quantity;
+                location.reload();
             },
             error: function (xhr, errmsg, err) {
                 console.log(xhr.status + ": " + xhr.responseText);

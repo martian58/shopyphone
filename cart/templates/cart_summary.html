@@ -12,6 +12,69 @@
 </header>
 <!-- Section-->
 <section class="py-5">
-Fuck shit
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">
+            {% if cart_products %}
+                {% for product in cart_products %}
+                    <div class="col mb-5" id="product-{{ product.id }}">
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="{{ product.name }}">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ product.name }}</h5>
+                                        <p class="card-text">{{ product.description }}</p>
+                                        <p class="card-text">
+                                            {% if product.is_sale %}
+                                                <strike>${{ product.price }}</strike> ${{ product.sale_price }}
+                                            {% else %}
+                                                ${{ product.price }}
+                                            {% endif %}
+                                        </p>
+                                        <p class="card-text"><small class="text-muted">Last updated {{ product.updated_at|timesince }} ago</small></p>
+                                        <a href="{% url 'product' product.id %}" class="btn btn-outline-dark mt-auto">View Details</a>
+                                        <button class="btn btn-danger mt-2 remove-from-cart" data-index="{{ product.id }}">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col text-center">
+                    <p class="display-4">Your cart is empty</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
 </section>
+
+<script>
+// Delete item 
+
+$(document).on('click', '.remove-from-cart', function(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: "{% url 'cart_remove' %}",
+        data: {
+            product_id: $(this).data('index'),
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            action: 'post'
+        },
+
+        success: function(json){
+            location.reload();
+        },
+
+        error: function(xhr, errmsg, err){
+
+        }
+    })
+})
+
+
+</script>
 {% endblock content %}

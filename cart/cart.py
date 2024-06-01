@@ -1,3 +1,5 @@
+from store.models import Product
+
 class Cart():
     def __init__(self,request) -> None:
         self.session = request.session
@@ -25,3 +27,20 @@ class Cart():
 
     def __len__(self):
         return len(self.cart)
+    
+
+    def get_products(self):
+
+        product_ids = self.cart.keys()
+
+        products = Product.objects.filter(id__in=product_ids) 
+
+        return products
+    
+    def remove(self, product):
+        product_id = str(product)
+
+        if product_id in self.cart:
+            del self.cart[product_id]
+
+        self.session.modified = True

@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django import forms
 from .forms import SignUpForm
 from .models import Product
+from django.db.models import Q
 
 
 def home(request):
@@ -24,6 +25,13 @@ def about(request):
 def product(request,pk):
         product = Product.objects.get(id=pk)
         return render(request, 'product.html', {'product':product})
+def search_results(request):
+    query = request.GET.get('query')
+    products = None
+    if query:
+        products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+    return render(request, 'home.html', {'query': query, 'products': products})
+
 
 
 def login_user(request):
