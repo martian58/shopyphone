@@ -27,14 +27,16 @@
                                 <p class="card-text">{{ product.description }}</p>
                                 <p class="card-text"><strong>Price: </strong>${{ product.price }}</p>
                                 <p class="card-text"><small class="text-muted">Last updated 1 min ago</small></p>
-                                <a href="3" class="btn btn-primary mt-3">Add to Cart</a>
+                                <form id="cart-form">
+                                    {% csrf_token %}
+                                    <button type="button" class="btn btn-primary mt-3" value="{{ product.id }}" id="add-to-cart">Add to Cart</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="mt-4">
                     <h4>Related Products</h4>
-                    Fuck shit
                     <div class="row row-cols-1 row-cols-md-3 g-4">
                         {% comment %} {% for related_product in related_products %} {% endcomment %}
                         <div class="col">
@@ -54,4 +56,29 @@
         </div>
     </div>
 </section>
+
+<script>
+    // Check if button is pressed
+    $(document).on('click', '#add-to-cart', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cart_add" %}',
+            data: {
+                product_id: $('#add-to-cart').val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+            success: function(json) {
+                // console.log(json);
+
+                document.getElementById("cart_quantity").textContent = json.quantity
+                location.reload
+            },
+            error: function (xhr, errmsg, err) {
+                console.log(xhr.status + ": " + xhr.responseText);
+            }
+        });
+    });
+</script>
 {% endblock content %}
