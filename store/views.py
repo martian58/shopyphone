@@ -25,6 +25,8 @@ def about(request):
 def product(request,pk):
         product = Product.objects.get(id=pk)
         return render(request, 'product.html', {'product':product})
+
+
 def search_results(request):
     query = request.GET.get('query')
     products = None
