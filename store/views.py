@@ -84,7 +84,7 @@ def logout_user(request):
     logout(request)
     return redirect('home')
 
-def index(request,):
+def contact_us(request,):
     if request.method == 'POST':
         # name = request.POST['name']
         to_email = request.POST.get('email')
@@ -105,4 +105,4 @@ def index(request,):
             from_email=settings.EMAIL_HOST_USER,
             to_email=to_email,
             )
-    return render(request, 'email.html')
+    return render(request, 'contact.html')

@@ -6,7 +6,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url "home" %}">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url "about" %}">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url "index" %}">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url "contact_us" %}">Contact Us</a></li>
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link" href="{% url "logout" %}">Logout</a></li>
                 {% else %}
