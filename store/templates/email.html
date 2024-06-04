@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Contact Us</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Get in touch with us</p>
+        </div>
+    </div>
+</header>
+
+<!-- Contact Form Section -->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="fw-bolder">Send Us an Email</h2>
+                <form action="{% url 'index' %}" method="post">
+                    {% csrf_token %}
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" required><br>
+                    
+                    <label for="subject">Subject:</label><br>
+                    <input type="text" id="subject" name="subject" required><br>
+                    
+                    <label for="message">Message:</label><br>
+                    <textarea id="message" name="message" rows="4" required></textarea><br>
+                    <input type="submit" value="Send Email">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Information Section -->
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="fw-bolder">Contact Information</h2>
+                <p class="lead">You can also contact us through the following methods:</p>
+                <ul>
+                    <li><a href="email:yunisesgerov90@gmail.com">Send us an email</a></li>
+                    <li><a href="tel:+994703107579">Call us</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

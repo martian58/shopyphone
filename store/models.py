@@ -79,4 +79,14 @@ class Order(models.Model):
         verbose_name = 'Orders'
         verbose_name_plural = 'Orders'
 
+class Mail(models.Model):
+    form_user_id = models.PositiveIntegerField(null=True, blank=True)
+    to_user_id = models.PositiveIntegerField(null=True, blank=True)
+    subject = models.CharField(max_length=256)
+    message = models.TextField(max_length=5000)
+    from_email = models.EmailField()
+    to_email = models.EmailField()
+    sent_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self) -> str:
+        return f"{self.pk} {self.from_email} -> {self.to_email}"

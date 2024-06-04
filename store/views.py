@@ -9,6 +9,11 @@ from .forms import SignUpForm
 from .models import Product
 from django.db.models import Q
 
+from django.core.mail import send_mail
+from django.conf import settings
+# from django.contrib.auth.models import User
+from .models import Mail
+from django.shortcuts import redirect
 
 def home(request):
     products = Product.objects.all()
@@ -76,3 +81,26 @@ def register_user(request):
 def logout_user(request):
     logout(request)
     return redirect('home')
+
+def index(request,):
+    if request.method == 'POST':
+        # name = request.POST['name']
+        to_email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        send_mail(
+            subject,
+            message,  
+            settings.EMAIL_HOST_USER,
+            recipient_list=[to_email],
+            fail_silently=False
+            )
+        
+        Mail.objects.create(
+            subject=subject,
+            message=message,  
+            from_email=settings.EMAIL_HOST_USER,
+            to_email=to_email,
+            )
+    return render(request, 'email.html')

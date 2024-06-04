@@ -124,3 +124,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = ['static/']
 MEDIA_URL =  'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+DEBUG = True
+EMAIL_BACKEND = 'shopyphone.email_backend.EmailBackend' 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'azcake1@gmail.com'
+EMAIL_HOST_PASSWORD = 'oiqkfrfbvagrsffs'
