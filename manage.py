@@ -2,7 +2,10 @@
 import os
 import sys
 
+from shopyphone.settings import VERSION
+
 if __name__ == "__main__":
+    print(f"Version:{VERSION}")
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shopyphone.settings")
     try:
         from django.core.management import execute_from_command_line
