@@ -19,13 +19,19 @@
                 <div class="card mb-3 shadow-lg border-0 rounded-lg">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="{{ product.name }}">
+                            <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="{{ product.brand_name }} {{ product.model_name }}">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">{{ product.name }}</h5>
+                                <h5 class="card-title">{{ product.brand_name }} {{ product.model_name }}</h5>
                                 <p class="card-text">{{ product.description }}</p>
                                 <p class="card-text"><strong>Price: </strong>${{ product.price }}</p>
+                                <p class="card-text"><strong>Color: </strong>{{ product.color }}</p>
+                                <p class="card-text"><strong>RAM: </strong>{{ product.ram }}</p>
+                                <p class="card-text"><strong>Memory: </strong>{{ product.memory }}</p>
+                                <p class="card-text"><strong>New: </strong>{{ product.is_new }}</p>
+                                <p class="card-text"><strong>Fingerprint: </strong>{{ product.fingerprint }}</p>
+                                <p class="card-text"><strong>Fice ID: </strong>{{ product.fice_id }}</p>
                                 <p class="card-text"><small class="text-muted">Last updated 1 min ago</small></p>
                                 <form id="cart-form">
                                     {% csrf_token %}

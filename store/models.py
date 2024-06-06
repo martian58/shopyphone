@@ -9,6 +9,7 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=100, blank=False)
+    id = models.BigAutoField(primary_key=True)
 
     def __str__(self) -> str:
         return self.name
@@ -39,8 +40,31 @@ class Customer(models.Model):
 
     
 class Product(models.Model):
-    name = models.CharField(max_length=100, blank=False)
+    RAM_CAPACITY = (
+        ('3', '3'),
+        ('4', '4'),
+        ('6', '6'),
+        ('8', '8'),
+        ('12', '12'),
+        )
+    
+    ROM_CAPACITY= (
+        ('32', '32'),
+        ('64', '64'),
+        ('128', '128'),
+        ('264', '264'),
+        ('512', '512'),
+        ('1024', '1024')
+    )
+    brand_name = models.CharField(max_length=100, blank=False)
+    model_name = models.CharField(max_length=100, blank=False)
     price = models.DecimalField(default =0,max_digits=6, decimal_places=2)
+    color = models.ForeignKey("Color", on_delete=models.CASCADE, null=True)
+    ram = models.CharField(max_length=2, choices=RAM_CAPACITY)
+    memory = models.CharField(max_length=4, choices=ROM_CAPACITY, help_text="GB")
+    is_new = models.BooleanField(default=False)
+    fingerprint = models.BooleanField(default=False)
+    fice_id = models.BooleanField(default=False)
     category = models.ForeignKey(Category, default=1, on_delete=models.CASCADE)
     description = models.CharField(default='', max_length=250, blank=True)
     image = models.ImageField(upload_to='uploads/pruduct/')
@@ -48,9 +72,8 @@ class Product(models.Model):
     is_sale = models.BooleanField(default=False)
     sale_price = models.DecimalField(default =0,max_digits=6, decimal_places=2)
 
-
     def __str__(self) -> str:
-        return self.name
+        return f"{self.brand_name} {self.model_name}"
     
     class Meta:
         db_table = 'products'
@@ -58,7 +81,11 @@ class Product(models.Model):
         verbose_name = 'Products'
         verbose_name_plural = 'Products'
 
+class Color(models.Model):
+    name = models.CharField(max_length=16)
 
+    def __str__(self) -> str:
+        return f"{self.name}"
 
 class Order(models.Model):
 
