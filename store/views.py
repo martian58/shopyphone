@@ -36,7 +36,7 @@ def search_results(request):
     query = request.GET.get('query')
     products = None
     if query:
-        products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+        products = Product.objects.filter(Q(brand_name__icontains=query) | Q(description__icontains=query))
     return render(request, 'home.html', {'query': query, 'products': products})
 
 
